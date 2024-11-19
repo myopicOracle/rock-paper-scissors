@@ -1,77 +1,93 @@
-console.log("Shall we play some Rock, Paper, Scissors?");
-
-// Step 1
-const choiceOne = "Rock";
-const choiceTwo = "Paper";
-const choiceThree = "Scissor";
-
-function getComputerChoice(flex) {
-    return Math.ceil(Math.random() * flex);
+function randomNumber() {
+    return Math.ceil(Math.random() * 3) //expected output: 1, 2, 3
 }
 
-const choice = getComputerChoice(3);
-console.log(choice);
+console.log(randomNumber());
 
-// Step 2
-let npc = 
-    (choice === 1) ?
-    choiceOne :
-    (choice === 2) ?
-    choiceTwo :
-    choiceThree;
+const num = Number(randomNumber());
+let computerChoice;
 
-console.log(npc);
+console.log(num);
 
-// Step 3
-const input = prompt("Please enter Rock, Paper, or Scissor.", "Rock");
-let player;
-
-switch (input) {
-    case "Rock":
-        alert(input);
-        player = input;
-        break;
-    case "Paper":
-        alert(input);
-        player = input;
-        break;
-    case "Scissor":
-        alert(input);
-        player = input;
-        break;
+function getComputerChoice(computerChoice) {
+  switch (num) {
+    case 1:
+      computerChoice = "rock";
+      break;
+    case 2:
+      computerChoice = "paper";
+      break;
+    case 3:
+      computerChoice = "scissor";
+      break;
     default:
-        alert ("Please enter a valid choice. Capitalization matters.");
+      computerChoice = "error";
+  }
+  return computerChoice;
 }
 
-console.log(player);
+getComputerChoice(computerChoice);
+console.log(getComputerChoice(computerChoice));
 
-// Step 4
+// end of computer choice
+
+let humanChoice;
+const input = prompt("Your turn. Please enter rock, paper, or scissor.", "rock, paper, scissor").toLowerCase()
+
+function getHumanChoice(humanChoice) {
+
+    if (input === "rock") {
+        humanChoice = "rock";
+    } else if (input === "paper") {
+        humanChoice = "paper";
+    } else if (input === "scissor") {
+        humanChoice = "scissor";
+    } else {
+        alert("Invalid choice. Please try again");
+    }
+
+    return humanChoice
+}
+
+console.log(getHumanChoice(humanChoice));
+
+// end of human choice 
+
+let evilBot2000 = getComputerChoice(computerChoice);
+let stupidHuman = getHumanChoice(humanChoice);
+
+let botScore = 0;
 let humanScore = 0;
-let computerScore = 0;
 
-// Step 5
-function singleRound(npc, player) {
+function theWinnerIs() {
 
-if (
-    (npc === "Rock" && player === "Scissor")
-    || (npc === "Paper" && player === "Rock")
-    || (npc === "Scissor" && player === "Paper")
-    ) {
-        console.log("The Computer Wins!");
-        computerScore++;
-    } else if (
-        (player === "Rock" && npc === "Scissor")
-        || (player === "Paper" && npc === "Rock")
-        || (player === "Scissor" && npc === "Paper")
-        ) {
-            console.log("The Human Wins!");
-            humanScore++;    
-        } else {
-            console.log("It's a Tie!");
-         }
-}  
+    if (evilBot2000 === "rock" && stupidHuman === "scissor") {
+        console.log("The Evil Robot Wins!");
+        botScore++;
+    } else if (evilBot2000 === "paper" && stupidHuman === "rock") {
+        console.log("The Evil Robot Wins!");
+        botScore++;
+    } else if (evilBot2000 === "scissor" && stupidHuman === "paper") {
+        console.log("The Evil Robot Wins!");
+        botScore++;
+    } else if (stupidHuman === "rock" && evilBot2000 === "scissor") {
+        console.log("The Stupid Human Wins!");
+        humanScore++;
+    } else if (stupidHuman === "paper" && evilBot2000 === "rock") {
+        console.log("The Stupid Human Wins!");
+        humanScore++;
+    } else if (stupidHuman === "scissor" && evilBot2000 === "paper") {
+        console.log("The Stupid Human Wins!");
+        humanScore++;
+    } else {
+        console.log("It's a tie! Human Robot Equality!");
+    }
 
-singleRound(npc, player);
-    
-console.log(computerScore);
-console.log(humanScore); 
+}   
+
+theWinnerIs();
+
+console.log(botScore);
+console.log(humanScore);
+
+// end of round 1
